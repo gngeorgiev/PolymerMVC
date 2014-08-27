@@ -3,59 +3,61 @@
 
 <polymer-element name="polymer-view">
 
-    <template>
-        <template if="{{selected == 'true'}}">
-            <content></content>
-        </template>
+  <template>
+    <template if="{{selected == 'true'}}">
+      <content></content>
     </template>
+  </template>
 
-    <script>
-        Polymer('polymer-view', {
-        	publish: {
-        		selected: 'false',
-        		$controller: ''
-        	},
-        	ready: function() {
-        		var host = this.shadowRoot.host;
-        		if (host.tagName === 'POLYMER-VIEW' || host.tagName === "POLYMER-MVC") {
-        			host.registerView(this);
-        		}
+  <script>
+    Polymer('polymer-view', {
+      publish: {
+        selected: 'false',
+        $controller: '',
+        $controllerName: ''
+      },
+      ready: function() {
+        var host = this.shadowRoot.host;
+        if (host.tagName === 'POLYMER-VIEW' || host.tagName === "POLYMER-MVC") {
+          host.registerView(this);
+        }
 
-        		this.registerController();
-        	},
-        	registerView: function(view) {
-        		if (!this.views) {
-        			this.views = [];
-        		}
+        this.registerController();
+      },
+      registerView: function(view) {
+        if (!this.views) {
+          this.views = [];
+        }
 
-        		this.views.push(view);
-        	},
-        	registerController: function() {
-        		var controllerName = this.$controller;
-        		if (controllerName !== undefined && controllerName !== null && typeof controllerName !== 'string') {
-        			controllerName = this.$controller.element.name;
-        		}
+        this.views.push(view);
+      },
+      registerController: function() {
+        var controllerName = this.$controller;
+        if (controllerName !== undefined && controllerName !== null && typeof controllerName !== 'string') {
+          controllerName = this.$controller.element.name;
+        }
 
-        		if (controllerName) {
-        			var meta = document.createElement('core-meta');
-        			meta.type = 'Controllers';
-        			var foundController = meta.metaData[controllerName];
-        			if (!foundController) {
-        				foundController = document.createElement(controllerName);
-        			}
+        if (controllerName) {
+          var meta = document.createElement('core-meta');
+          meta.type = 'Controllers';
+          var foundController = meta.metaData[controllerName];
+          if (!foundController) {
+            foundController = document.createElement(controllerName);
+            foundController.$controllerName = this.$controllerName;
+          }
 
-        			foundController.$view = this;
-        			foundController.$scope = foundController.$scope || {};
-        			this.$controller = foundController;
-        			this.$scope = this.$controller.$scope;
-        			this.childNodes.array().forEach(function(node) {
-        				node.$controller = foundController;
-        				node.$scope = foundController.$scope;
-        			})
-        		}
-        	},
+          foundController.$view = this;
+          foundController.$scope = foundController.$scope || {};
+          this.$controller = foundController;
+          this.$scope = this.$controller.$scope;
+          this.childNodes.array().forEach(function(node) {
+            node.$controller = foundController;
+            node.$scope = foundController.$scope;
+          })
+        }
+      },
 
-        });
-    </script>
+    });
+  </script>
 
 </polymer-element>

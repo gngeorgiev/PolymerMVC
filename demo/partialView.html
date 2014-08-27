@@ -1,0 +1,21 @@
+<link rel="import" href="../../polymer/polymer.html" />
+<link rel="import" href="partialController.html" />
+
+<polymer-element name="partial-view">
+  <template>
+    <input type="text" value="{{$scope.name}}" />
+    <br/>Hello {{$scope.name}}
+    <button on-click="{{$scope.click}}">Click me</button>
+  </template>
+
+  <script>
+    Polymer('partial-view', {
+      click: function() {
+        //this will be resolved with https://github.com/Polymer/polymer-dev/issues/19
+        //is resolved in the local source - /polymer-dev/src/instance/events.js
+        //change the button on-click attribute to just click to make it work without the modified source
+        this.$scope.click();
+      }
+    });
+  </script>
+</polymer-element>

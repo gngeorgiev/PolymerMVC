@@ -2,14 +2,13 @@
 <link rel="import" href="../polymerController.html" />
 
 <polymer-element name="partial-controller" extends="polymer-controller">
-    <script>
-        Polymer('partial-controller', {
-        	ready: function() {
-        		this.$scope.click = function() {
-        			//this is the $scope
-        			this.name = "fuck you";
-        		}
-        	}
-        });
-    </script>
+  <script>
+    Polymer('partial-controller', {
+      ready: function() {
+        this.$scope.click = function() {
+          this.$scope.name = "changed from button";
+        }
+      }
+    });
+  </script>
 </polymer-element>
