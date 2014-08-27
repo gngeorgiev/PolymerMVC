@@ -1,0 +1,24 @@
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../core-meta/core-meta.html" />
+
+<polymer-element name="polymer-controller" hidden>
+    <script>
+        Polymer('polymer-controller', {
+        	publish: {
+        		controllerName: '',
+        		$view: null,
+        		$scope: null
+        	},
+        	ready: function() {
+        		var meta = document.createElement('core-meta');
+        		meta.type = 'Controller';
+        		meta.id = this.controllerName || this.element.name;
+        		meta.register(meta.id);
+
+        		if (!this.$scope) {
+        			this.$scope = {};
+        		}
+        	}
+        });
+    </script>
+</polymer-element>

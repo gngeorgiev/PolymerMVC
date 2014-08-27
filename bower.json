@@ -1,0 +1,25 @@
+{
+  "name": "PolymerMVC",
+  "version": "0.0.1",
+  "authors": [
+    "gngeorgiev <gngeorgiev.it@gmail.com>"
+  ],
+  "description": "MVC Framework for Polymer",
+  "keywords": [
+    "mvc",
+    "framework",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "modulerr": "*"
+  }
+}
