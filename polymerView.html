@@ -4,7 +4,7 @@
 <polymer-element name="polymer-view">
 
   <template>
-    <template if="{{selected == 'true'}}">
+    <template if="{{selected}}">
       <content></content>
     </template>
   </template>
@@ -12,18 +12,23 @@
   <script>
     Polymer('polymer-view', {
       publish: {
-        selected: 'false',
-        $controller: '',
-        $controllerName: '',
-        attached: false
+        selected: {
+          value: false,
+          refrect: true
+        },
+        controller: ''
       },
       ready: function() {
         var host = this.shadowRoot.host;
-        if (host.tagName === 'POLYMER-VIEW' || host.tagName === "POLYMER-MVC") {
+        if (host && host['registerView'] && typeof host['registerView'] === 'function') {
           host.registerView(this);
         }
 
-        this.enqueueForAttach();
+        if (this.controller || typeof this.controller === 'string') {
+          this.enqueueForAttach();
+          this.forceControllerAttach();
+        }
+
       },
       registerView: function(view) {
         if (!this.views) {
@@ -33,25 +38,29 @@
         this.views.push(view);
       },
       enqueueForAttach: function() {
-        if (!this.$controller || typeof this.$controller !== 'string') {
-          return;
-        }
-
         var meta = document.createElement('core-meta');
         meta.type = 'ControllersQueue';
-        var registeredMeta = meta.metaData[this.$controller];
+        var registeredMeta = meta.metaData[this.controller];
         if (!registeredMeta) {
           meta.views = [];
           meta.views.push(this);
-          meta.register(this.$controller);
+          meta.register(this.controller);
         } else {
           registeredMeta.views.push(this);
         }
       },
+      forceControllerAttach: function() {
+        var meta = document.createElement('core-meta');
+        meta.type = 'Controllers';
+        var registeredMeta = meta.byId(this.controller);
+        if (registeredMeta) {
+          registeredMeta.controller.attachView();
+        }
+      },
       attachController: function(controller) {
-        this.$controller = controller;
-        this.$controller.$view = this;
-        this.$scope = this.$controller.$scope;
+        this._$controller = controller;
+        this._$controller._$view = this;
+        this._$scope = this.$controller.$scope;
         this.childNodes.array().forEach(function(node) {
           if (!node.tagName) {
             return;
@@ -60,6 +69,12 @@
           node.$controller = controller;
           node.$scope = controller.$scope;
         });
+      },
+      get $controller() {
+        return this._$controller;
+      },
+      get $scope() {
+        return this._$scope;
       }
     });
   </script>

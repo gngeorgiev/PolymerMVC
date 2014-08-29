@@ -5,10 +5,9 @@
   <script>
     Polymer('polymer-controller', {
       publish: {
-        controllerName: '',
-        $view: null,
-        _registered: false
+        controllerName: ''
       },
+      _registered: false,
       ready: function() {
         this.register();
         this.attachView();
@@ -44,6 +43,9 @@
         }
 
         return this._$scope;
+      },
+      get $view() {
+        return this._$view;
       }
     });
   </script>
