@@ -39,8 +39,14 @@
 
         var meta = document.createElement('core-meta');
         meta.type = 'ControllersQueue';
-        meta.view = this;
-        meta.register(this.$controller);
+        var registeredMeta = meta.metaData[this.$controller];
+        if (!registeredMeta) {
+          meta.views = [];
+          meta.views.push(this);
+          meta.register(this.$controller);
+        } else {
+          registeredMeta.views.push(this);
+        }
       },
       attachController: function(controller) {
         this.$controller = controller;

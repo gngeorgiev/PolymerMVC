@@ -30,10 +30,12 @@
         var meta = document.createElement('core-meta');
         meta.type = 'ControllersQueue';
         var viewMeta = meta.metaData[this.controllerName];
-        if (viewMeta && viewMeta.view) {
+        if (viewMeta && viewMeta.views) {
           delete meta.metaData[this.controllerName];
-          var view = viewMeta.view;
-          view.attachController(this);
+          for (var i = 0; i < viewMeta.views.length; i++) {
+            var view = viewMeta.views[i];
+            view.attachController(this);
+          }
         }
       },
       get $scope() {
