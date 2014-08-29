@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html" />
 <link rel="import" href="../core-meta/core-meta.html" />
 
-<polymer-element name="polymer-controller" hidden>
+<polymer-element name="polymer-controller" constructor="PolymerController" hidden>
   <script>
     Polymer('polymer-controller', {
       publish: {
@@ -11,7 +11,9 @@
       ready: function() {
         this.register();
         this.attachView();
+        this.initScope();
       },
+      initScope: function() {},
       register: function() {
         if (this._registered) {
           return;
