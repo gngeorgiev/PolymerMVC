@@ -5,8 +5,9 @@
   <script>
     Polymer('partial-controller', {
       ready: function() {
+        this.super();
         this.$scope.click = function() {
-          this.$scope.name = "changed from button";
+          this.name = "yeahh";
         }
       }
     });

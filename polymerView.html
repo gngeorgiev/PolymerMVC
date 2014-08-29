@@ -14,7 +14,8 @@
       publish: {
         selected: 'false',
         $controller: '',
-        $controllerName: ''
+        $controllerName: '',
+        attached: false
       },
       ready: function() {
         var host = this.shadowRoot.host;
@@ -22,7 +23,7 @@
           host.registerView(this);
         }
 
-        this.registerController();
+        this.enqueueForAttach();
       },
       registerView: function(view) {
         if (!this.views) {
@@ -31,32 +32,29 @@
 
         this.views.push(view);
       },
-      registerController: function() {
-        var controllerName = this.$controller;
-        if (controllerName !== undefined && controllerName !== null && typeof controllerName !== 'string') {
-          controllerName = this.$controller.element.name;
+      enqueueForAttach: function() {
+        if (!this.$controller || typeof this.$controller !== 'string') {
+          return;
         }
 
-        if (controllerName) {
-          var meta = document.createElement('core-meta');
-          meta.type = 'Controllers';
-          var foundController = meta.metaData[controllerName];
-          if (!foundController) {
-            foundController = document.createElement(controllerName);
-            foundController.$controllerName = this.$controllerName;
+        var meta = document.createElement('core-meta');
+        meta.type = 'ControllersQueue';
+        meta.view = this;
+        meta.register(this.$controller);
+      },
+      attachController: function(controller) {
+        this.$controller = controller;
+        this.$controller.$view = this;
+        this.$scope = this.$controller.$scope;
+        this.childNodes.array().forEach(function(node) {
+          if (!node.tagName) {
+            return;
           }
 
-          foundController.$view = this;
-          foundController.$scope = foundController.$scope || {};
-          this.$controller = foundController;
-          this.$scope = this.$controller.$scope;
-          this.childNodes.array().forEach(function(node) {
-            node.$controller = foundController;
-            node.$scope = foundController.$scope;
-          })
-        }
-      },
-
+          node.$controller = controller;
+          node.$scope = controller.$scope;
+        });
+      }
     });
   </script>
 

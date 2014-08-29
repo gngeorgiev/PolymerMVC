@@ -2,23 +2,47 @@
 <link rel="import" href="../core-meta/core-meta.html" />
 
 <polymer-element name="polymer-controller" hidden>
-    <script>
-        Polymer('polymer-controller', {
-        	publish: {
-        		controllerName: '',
-        		$view: null,
-        		$scope: null
-        	},
-        	ready: function() {
-        		var meta = document.createElement('core-meta');
-        		meta.type = 'Controller';
-        		meta.id = this.controllerName || this.element.name;
-        		meta.register(meta.id);
+  <script>
+    Polymer('polymer-controller', {
+      publish: {
+        controllerName: '',
+        $view: null,
+        _registered: false
+      },
+      ready: function() {
+        this.register();
+        this.attachView();
+      },
+      register: function() {
+        if (this._registered) {
+          return;
+        }
 
-        		if (!this.$scope) {
-        			this.$scope = {};
-        		}
-        	}
-        });
-    </script>
+        var meta = document.createElement('core-meta');
+        meta.type = 'Controller';
+        meta.controller = this;
+        meta.id = this.controllerName || this.element.name;
+        meta.register(meta.id);
+
+        this._registered = true;
+      },
+      attachView: function() {
+        var meta = document.createElement('core-meta');
+        meta.type = 'ControllersQueue';
+        var viewMeta = meta.metaData[this.controllerName];
+        if (viewMeta && viewMeta.view) {
+          delete meta.metaData[this.controllerName];
+          var view = viewMeta.view;
+          view.attachController(this);
+        }
+      },
+      get $scope() {
+        if (!this._$scope) {
+          this._$scope = {};
+        }
+
+        return this._$scope;
+      }
+    });
+  </script>
 </polymer-element>

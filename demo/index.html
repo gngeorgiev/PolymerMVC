@@ -15,7 +15,11 @@
 
   <body>
     <polymer-mvc>
-      <polymer-view selected="true" $controller="partial-controller" $controllerName="partial-controller1">
+      <partial-controller controllerName="partial-controller1"></partial-controller>
+      <polymer-view selected="true" $controller="partial-controller1">
+        <partial-view></partial-view>
+      </polymer-view>
+      <polymer-view selected="true" $controller="partial-controller1">
         <partial-view></partial-view>
       </polymer-view>
     </polymer-mvc>
