@@ -4,7 +4,7 @@
 <polymer-element name="polymer-view" constructor="PolymerView">
 
   <template>
-    <template if="{{selected == 'true'}}">
+    <template if="{{selected}}">
       <content></content>
     </template>
   </template>
@@ -12,7 +12,10 @@
   <script>
     Polymer('polymer-view', {
       publish: {
-        selected: 'false',
+        selected: {
+          value: false,
+          reflect: true
+        },
         controller: ''
       },
       ready: function() {
@@ -21,7 +24,7 @@
           host.registerView(this);
         }
 
-        if (this.controller || typeof this.controller === 'string') {
+        if (this.controller && typeof this.controller === 'string') {
           this.enqueueForAttach();
           this.forceControllerAttach();
         }
@@ -44,8 +47,6 @@
         } else {
           registeredMeta.views.push(this);
         }
-
-        meta.asyncUnbindAll();
       },
       forceControllerAttach: function() {
         var meta = document.createElement('core-meta');
@@ -54,8 +55,6 @@
         if (registeredMeta) {
           registeredMeta.controller.attachView();
         }
-
-        meta.asyncUnbindAll();
       },
       attachController: function(controller) {
         this._$controller = controller;
