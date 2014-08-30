@@ -68,6 +68,10 @@
           node.$controller = controller;
           node.$scope = controller.$scope;
         });
+
+        if (this._mapFunctions) {
+          this.mapScopeFunctions();
+        }
       },
       get $controller() {
         return this._$controller;
@@ -77,5 +81,4 @@
       }
     });
   </script>
-
 </polymer-element>

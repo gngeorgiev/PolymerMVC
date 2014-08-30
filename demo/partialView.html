@@ -5,10 +5,14 @@
   <template>
     <input type="text" value="{{$scope.name}}" />
     <br/>Hello {{$scope.name}}
-    <button on-click="{{$scope.click}}">Click me</button>
+    <button on-click="{{buttonClick}}">Click me</button>
   </template>
 
   <script>
-    Polymer('partial-view');
+    Polymer('partial-view', {
+      ready: function() {
+        this.buttonClick = this.$scope.buttonClick;
+      }
+    });
   </script>
 </polymer-element>

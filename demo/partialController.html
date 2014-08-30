@@ -4,9 +4,9 @@
 <polymer-element name="partial-controller" extends="polymer-controller">
   <script>
     Polymer('partial-controller', {
-      initScope: function() {
-        this.$scope.click = function() {
-          this.$scope.name = "yeahh";
+      initScope: function($scope) {
+        $scope.buttonClick = function() {
+          $scope.name = "yeahh";
         }
       }
     });

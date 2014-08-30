@@ -11,9 +11,9 @@
       ready: function() {
         this.register();
         this.attachView();
-        this.initScope();
+        this.initScope(this.$scope);
       },
-      initScope: function() {},
+      initScope: function($scope) {},
       register: function() {
         if (this._registered) {
           return;
