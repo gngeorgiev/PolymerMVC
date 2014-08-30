@@ -24,6 +24,7 @@
         meta.controller = this;
         meta.id = this.controllerName || this.element.name;
         meta.register(meta.id);
+        meta.asyncUnbindAll();
 
         this._registered = true;
       },
@@ -38,6 +39,8 @@
             view.attachController(this);
           }
         }
+
+        meta.asyncUnbindAll();
       },
       get $scope() {
         if (!this._$scope) {

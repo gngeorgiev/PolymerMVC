@@ -4,7 +4,7 @@
 <polymer-element name="polymer-view" constructor="PolymerView">
 
   <template>
-    <template if="{{selected}}">
+    <template if="{{selected == 'true'}}">
       <content></content>
     </template>
   </template>
@@ -48,6 +48,8 @@
         } else {
           registeredMeta.views.push(this);
         }
+
+        meta.asyncUnbindAll();
       },
       forceControllerAttach: function() {
         var meta = document.createElement('core-meta');
@@ -56,6 +58,8 @@
         if (registeredMeta) {
           registeredMeta.controller.attachView();
         }
+
+        meta.asyncUnbindAll();
       },
       attachController: function(controller) {
         this._$controller = controller;
