@@ -1,25 +1,31 @@
 {
-	"name": "PolymerMVC",
-	"version": "0.0.1",
-	"authors": [
-		"gngeorgiev <gngeorgiev.it@gmail.com>"
-	],
-	"description": "MVC Framework for Polymer",
-	"keywords": [
-		"mvc",
-		"framework",
-		"polymer"
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"/",
-		"test",
-		"tests"
-	],
-	"dependencies": {
-
-	}
+  "name": "PolymerMVC",
+  "version": "0.0.1",
+  "authors": [
+    "gngeorgiev <gngeorgiev.it@gmail.com>"
+  ],
+  "description": "MVC Framework for Polymer",
+  "keywords": [
+    "mvc",
+    "framework",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "core-meta": "Polymer/core-meta#~0.4.0",
+    "polymer-dev": "Polymer/polymer-dev#~0.4.0",
+    "core-component-page": "Polymer/core-component-page#~0.4.0",
+    "core-ajax": "Polymer/core-ajax#~0.4.0",
+    "polymer": "Polymer/polymer#~0.4.0",
+    "platform-dev": "Polymer/platform-dev#~0.4.0"
+  }
 }
