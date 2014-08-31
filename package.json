@@ -1,0 +1,25 @@
+{
+  "name": "PolymerMVC",
+  "version": "0.0.1",
+  "description": "MVC framework for Polymer",
+  "main": "\"\"",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gngeorgiev/PolymerMVC.git"
+  },
+  "keywords": [
+    "polymer",
+    "mvc",
+    "framework",
+    "animations"
+  ],
+  "author": "gngeorgiev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gngeorgiev/PolymerMVC/issues"
+  },
+  "homepage": "https://github.com/gngeorgiev/PolymerMVC"
+}
