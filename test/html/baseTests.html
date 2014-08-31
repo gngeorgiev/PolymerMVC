@@ -17,7 +17,9 @@
 
   <script>
     document.addEventListener('polymer-ready', function() {
-    	window.top.expect(PolymerController).toBeDefined();
+    	window.top.describe('BaseHtmlTests', function() {
+    		window.top.expect(PolymerController).toBeDefined();
+    	})
     })
   </script>
 

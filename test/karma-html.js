@@ -6,13 +6,6 @@
 		var iFrame = document.createElement('iframe');
 		document.body.appendChild(iFrame);
 		var baseSrc = getBasePath();
-		// it(name, function () {
-		// 	runs(iFrame.onload);
-		// });
-		//
-		// iFrame.onload = function () {
-		// 	fn();
-		// }
 
 		iFrame.contentWindow.expect = window.expect;
 		iFrame.src = baseSrc + src;
@@ -23,18 +16,17 @@
 		for (var i in scripts) {
 			var sc = scripts[i];
 			if (sc.src.indexOf(thisFile) !== -1) {
-				var src = sc.src.replace(thisFile, '');
+				var src = '';
+				if (sc.src.indexOf(thisFile + '?') === -1) {
+					src = sc.src.replace(thisFile, '');
+				} else {
+					src = sc.src.substring(0, sc.src.length - sc.src.indexOf(thisFile) - thisFile.length + 2)
+				}
+
 				src += 'html/';
 				return src;
 			}
 		}
-	}
-
-	window.__karma__.loaded = function () {
-		var that = this;
-		document.addEventListener('polymer-ready', function () {
-			that.start();
-		})
 	}
 
 	w.htmlIt = htmlIt;
