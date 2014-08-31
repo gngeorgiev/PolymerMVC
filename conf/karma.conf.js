@@ -5,7 +5,7 @@ module.exports = function (config) {
 	config.set({
 
 		// base path that will be used to resolve all patterns (eg. files, exclude)
-		basePath: '',
+		basePath: '../../',
 
 
 		// frameworks to use
@@ -15,7 +15,144 @@ module.exports = function (config) {
 
 		// list of files / patterns to load in the browser
 		files: [
-			'../test/js/*.spec.js'
+			'PolymerMVC/test/karma-html.js',
+			'PolymerMVC/test/js/*.spec.js',
+			'platform-dev/platform.js',
+			'PolymerMVC/polymerMvc-core.js',
+			'PolymerMVC/js/*.js', {
+				pattern: '**/*.html',
+				included: false
+			}, {
+				pattern: 'polymer/*.html',
+				included: false,
+			}, {
+				pattern: 'CustomElements/custom-elements.js',
+				included: false
+			}, {
+				pattern: 'CustomElements/src/*.js',
+				included: false
+			}, {
+				pattern: 'HTMLImports/html-imports.js',
+				included: false
+			}, {
+				pattern: 'HTMLImports/src/*',
+				included: false
+			}, {
+				pattern: 'MutationObservers/*.js',
+				included: false
+			}, {
+				pattern: 'NodeBind/src/*.js',
+				included: false
+			}, {
+				pattern: 'PointerEvents/pointerevents.js',
+				included: false
+			}, {
+				pattern: 'PointerEvents/src/*.js',
+				included: false
+			}, {
+				pattern: 'PointerGestures/pointergestures.js',
+				included: false
+			}, {
+				pattern: 'PointerGestures/src/*.js',
+				included: false
+			}, {
+				pattern: 'ShadowDOM/shadowdom.js',
+				included: false
+			}, {
+				pattern: 'ShadowDOM/src/**/*.js',
+				included: false
+			}, {
+				pattern: 'TemplateBinding/load.js',
+				included: false
+			}, {
+				pattern: 'TemplateBinding/src/*.css',
+				included: false
+			}, {
+				pattern: 'TemplateBinding/src/*.js',
+				included: false
+			}, {
+				pattern: 'URL/url.js',
+				included: false
+			}, {
+				pattern: 'WeakMap/weakmap.js',
+				included: false
+			}, {
+				pattern: 'observe-js/src/*.js',
+				included: false
+			}, {
+				pattern: 'observe-js/util/*.js',
+				included: false
+			}, {
+				pattern: 'platform-dev/platform.*',
+				included: false
+			}, {
+				pattern: 'platform-dev/src/*.js',
+				included: false
+			}, {
+				pattern: 'platform-dev/test/**/*.html',
+				included: false
+			}, {
+				pattern: 'platform-dev/test/**/*.js',
+				included: false
+			}, {
+				pattern: 'polymer-expressions/src/*.js',
+				included: false
+			}, {
+				pattern: 'polymer-expressions/third_party/**/*.js',
+				included: false
+			}, {
+				pattern: 'polymer-expressions/polymer-expressions.html',
+				included: false
+			}, {
+				pattern: 'polymer-gestures/polymer-gestures.html',
+				included: false
+			}, {
+				pattern: 'polymer-gestures/src/*.js',
+				included: false
+			}, {
+				pattern: 'polymer-expressions/tests/*.js',
+				included: false
+			}, {
+				pattern: 'TemplateBinding/tests/*.js',
+				included: false
+			}, {
+				pattern: 'polymer-dev/polymer.html',
+				included: false
+			}, {
+				pattern: 'polymer-dev/layout.html',
+				included: false
+			}, {
+				pattern: 'polymer-dev/src/**/*.js',
+				included: false
+			}, {
+				pattern: 'polymer-dev/build/polymer.js',
+				included: false
+			}, {
+				pattern: 'polymer-dev/test/**/*.css',
+				included: false
+			}, {
+				pattern: 'polymer-dev/test/**/*.html',
+				included: false
+			}, {
+				pattern: 'polymer-dev/test/**/*.js',
+				included: false
+			}, {
+				pattern: 'tools/**/*.js',
+				included: false
+			}, {
+				pattern: 'tools/test/*',
+				included: false
+			}, {
+				pattern: 'PolymerMVC/test/html/*.html',
+				watched: true,
+				served: true,
+				included: false
+			}, {
+				pattern: 'PolymerMVC/*.html',
+				watched: true,
+				server: true,
+				included: false
+			}
 		],
 
 
@@ -31,7 +168,7 @@ module.exports = function (config) {
 		// test results reporter to use
 		// possible values: 'dots', 'progress'
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['progress'],
+		reporters: ['mocha'],
 
 
 		// web server port
