@@ -2,53 +2,5 @@
 <link rel="import" href="../core-meta/core-meta.html" />
 
 <polymer-element name="polymer-controller" constructor="PolymerController" hidden>
-  <script>
-    Polymer('polymer-controller', {
-      publish: {
-        controllerName: ''
-      },
-      _registered: false,
-      ready: function() {
-        this.register();
-        this.attachView();
-        this.initScope(this.$scope);
-      },
-      initScope: function($scope) {},
-      register: function() {
-        if (this._registered) {
-          return;
-        }
-
-        var meta = document.createElement('core-meta');
-        meta.type = 'Controllers';
-        meta.controller = this;
-        meta.id = this.controllerName || this.element.name;
-        meta.register(meta.id);
-
-        this._registered = true;
-      },
-      attachView: function() {
-        var meta = document.createElement('core-meta');
-        meta.type = 'ControllersQueue';
-        var viewMeta = meta.metaData[this.controllerName];
-        if (viewMeta && viewMeta.views) {
-          delete meta.metaData[this.controllerName];
-          for (var i = 0; i < viewMeta.views.length; i++) {
-            var view = viewMeta.views[i];
-            view.attachController(this);
-          }
-        }
-      },
-      get $scope() {
-        if (!this._$scope) {
-          this._$scope = {};
-        }
-
-        return this._$scope;
-      },
-      get $view() {
-        return this._$view;
-      }
-    });
-  </script>
+  <script src="js/polymerControllerCore.js"></script>
 </polymer-element>
