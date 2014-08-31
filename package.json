@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/gngeorgiev/PolymerMVC/issues"
   },
-  "homepage": "https://github.com/gngeorgiev/PolymerMVC"
+  "homepage": "https://github.com/gngeorgiev/PolymerMVC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-karma": "^0.8.3",
+    "karma": "^0.12.23",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4"
+  }
 }
