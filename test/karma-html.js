@@ -3,27 +3,24 @@
 	var thisFile = 'karma-html.js';
 
 	function htmlIt(name, src, fn) {
-		var iFrame = document.createElement('iframe');
-		document.body.appendChild(iFrame);
-		var baseSrc = getBasePath();
+		it(name, function (done) {
+			var iFrame = document.createElement('iframe');
+			document.body.appendChild(iFrame);
+			var baseSrc = getBasePath();
 
-		iFrame.src = baseSrc + src;
-		iFrame.loaded = false;
-
-		iFrame.onload = function () {
-			iFrame.loaded = true;
-		}
-		it(name, function () {
-			waitsFor(function () {
-				return iFrame.loaded;
-			});
-
-			runs(function () {
-				iFrame.contentWindow.test(window.expect, window);
-
+			function doneFake() {
 				iFrame.parentNode.removeChild(iFrame);
-			});
+				done();
+			}
 
+			iFrame.onload = function () {
+				var res = iFrame.contentWindow.test(window.expect, window, doneFake);
+				if (res !== false) {
+					doneFake();
+				}
+			}
+
+			iFrame.src = baseSrc + src;
 		})
 	}
 
