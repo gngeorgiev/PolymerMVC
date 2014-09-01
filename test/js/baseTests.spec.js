@@ -1,7 +1,8 @@
 describe('Base functionality tests:', function () {
 
-	describe('baseTest', function () {
-		htmlIt('test', 'baseTests.html');
+	describe('Binding: ', function () {
+		htmlIt('$scope binding', 'binding-test.html');
+		htmlIt('constructors existence', 'constructors-test.html');
 	})
 
 });

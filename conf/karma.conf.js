@@ -20,7 +20,7 @@ module.exports = function (config) {
 			'polymer-dev/test/lib/htmltest.js',
 			'PolymerMVC/test/karma-html.js',
 			'PolymerMVC/test/js/*.spec.js',
-			'PolymerMVC/polymerMvc-core.js',
+			'PolymerMVC/polymerMvcCore.js',
 			'PolymerMVC/js/*.js', {
 				pattern: '**/*.html',
 				included: false
@@ -142,7 +142,12 @@ module.exports = function (config) {
 		// test results reporter to use
 		// possible values: 'dots', 'progress'
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['mocha'],
+		reporters: ['mocha', 'progress', 'notify'],
+
+		notifyReporter: {
+			reportEachFailure: true, // Default: false, Will notify on every failed sepc
+			reportSuccess: true, // Default: true, Will notify when a suite was successful
+		},
 
 
 		// web server port
@@ -170,7 +175,8 @@ module.exports = function (config) {
 		plugins: [
 			'karma-chrome-launcher',
 			'karma-jasmine',
-			'karma-mocha-reporter'
+			'karma-mocha-reporter',
+			'karma-notify-reporter'
 		],
 
 		// Continuous Integration mode

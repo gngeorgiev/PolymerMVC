@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="">
+
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../../platform-dev/platform.js"></script>
+    <script src="../../polymerMvcCore.js"></script>
+
+    <link rel="import " href="../../polymerMvc.html ">
+    <link rel="import " href="../../polymerController.html ">
+    <link rel="import " href="../../polymerView.html ">
+  </head>
+
+  <polymer-element name="test-ctrl" extends="polymer-controller">
+
+    <script>
+      Polymer('test-ctrl', {
+        initScope: function($scope) {
+          $scope.val = 5;
+        }
+      });
+    </script>
+
+  </polymer-element>
+
+  <polymer-element name="test-partial-view">
+    <template>
+      <p>
+        {{$scope.val}}
+      </p>
+    </template>
+
+    <script>
+      Polymer('test-partial-view', {
+        ready: function() {
+          this.value = this.$scope;
+        }
+      });
+    </script>
+
+  </polymer-element>
+
+  <body>
+
+    <test-ctrl></test-ctrl>
+
+    <polymer-mvc>
+      <polymer-view selected controller="test-ctrl">
+        <test-partial-view></test-partial-view>
+      </polymer-view>
+    </polymer-mvc>
+
+  </body>
+
+  <script>
+    function test(expect) {
+      var ctrl = document.querySelector('test-ctrl');
+      var view = document.querySelector('test-partial-view');
+      expect(ctrl.$scope).toBeDefined();
+      expect(ctrl.$scope.val).toBeDefined();
+      expect(ctrl.$scope.val).toEqual(5);
+      expect(view.$scope).toBeDefined();
+      expect(view.$scope.val).toEqual(5);
+
+      var viewVal = view.shadowRoot.querySelector('p').innerText;
+      expect(viewVal | 0).toBe(5);
+
+      ctrl.$scope.val = 4;
+      expect(view.$scope.val).toEqual(4);
+
+      Platform.flush();
+
+      var newViewVal = view.shadowRoot.querySelector('p').innerText;
+    }
+  </script>
+
+</html>
