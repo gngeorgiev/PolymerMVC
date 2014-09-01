@@ -3,10 +3,6 @@ module.exports = function (grunt) {
 		karma: {
 			unit: {
 				configFile: 'conf/karma.conf.js',
-				browsers: ['PhantomJS']
-			},
-			debug: {
-				configFile: 'conf/karma.conf.js',
 				browsers: ['Chrome']
 			}
 		}
@@ -14,6 +10,5 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-karma');
 
-	grunt.registerTask('test-debug', ['karma:debug']);
 	grunt.registerTask('test', ['karma:unit']);
 };

@@ -1,6 +1,7 @@
 describe('Base functionality tests:', function () {
 
-	it('Sample', function () {});
+	describe('baseTest', function () {
+		htmlIt('test', 'baseTests.html');
+	})
 
-	htmlIt('SampleHtml', 'baseTests.html');
 });

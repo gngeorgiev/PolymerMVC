@@ -7,8 +7,23 @@
 		document.body.appendChild(iFrame);
 		var baseSrc = getBasePath();
 
-		iFrame.contentWindow.expect = window.expect;
 		iFrame.src = baseSrc + src;
+		iFrame.loaded = false;
+		iFrame.onload = function () {
+			iFrame.loaded = true;
+		}
+
+		it(name, function () {
+			waitsFor(function () {
+				return iFrame.loaded;
+			});
+
+			runs(function () {
+				iFrame.contentWindow.test(window.expect, window);
+				iFrame.parentNode.removeChild(iFrame);
+			});
+
+		})
 	}
 
 	function getBasePath() {

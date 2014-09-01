@@ -10,20 +10,19 @@
     <link rel="import " href="../../polymerMvc.html ">
     <link rel="import " href="../../polymerController.html ">
     <link rel="import " href="../../polymerView.html ">
+
+
+    <script src="../../../tools/test/htmltest.js"></script>
+    <script src="../../../tools/test/chai/chai.js"></script>
+
+    <script>
+      function test(expect) {
+        expect(true).toBeTruthy();
+      }
+    </script>
   </head>
 
   <body>
   </body>
-
-  <script>
-    document.addEventListener('polymer-ready', function() {
-    	var w = window.top;
-    	w.describe('BaseHtmlTests', function() {
-    		w.it('Should have PolymerController defined', function() {
-    			w.expect(PolymerController).toBeDefined();
-    		})
-    	})
-    })
-  </script>
 
 </html>

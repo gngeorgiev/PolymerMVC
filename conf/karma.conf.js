@@ -2,6 +2,7 @@
 // Generated on Sun Aug 31 2014 18:36:57 GMT+0300 (EEST)
 
 module.exports = function (config) {
+
 	config.set({
 
 		// base path that will be used to resolve all patterns (eg. files, exclude)
@@ -12,12 +13,13 @@ module.exports = function (config) {
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 		frameworks: ['jasmine'],
 
-
 		// list of files / patterns to load in the browser
 		files: [
+			'platform-dev/platform.js',
+			'polymer-dev/test/lib/karma-include-polymer.js',
+			'polymer-dev/test/lib/htmltest.js',
 			'PolymerMVC/test/karma-html.js',
 			'PolymerMVC/test/js/*.spec.js',
-			'platform-dev/platform.js',
 			'PolymerMVC/polymerMvc-core.js',
 			'PolymerMVC/js/*.js', {
 				pattern: '**/*.html',
@@ -42,18 +44,6 @@ module.exports = function (config) {
 				included: false
 			}, {
 				pattern: 'NodeBind/src/*.js',
-				included: false
-			}, {
-				pattern: 'PointerEvents/pointerevents.js',
-				included: false
-			}, {
-				pattern: 'PointerEvents/src/*.js',
-				included: false
-			}, {
-				pattern: 'PointerGestures/pointergestures.js',
-				included: false
-			}, {
-				pattern: 'PointerGestures/src/*.js',
 				included: false
 			}, {
 				pattern: 'ShadowDOM/shadowdom.js',
@@ -89,12 +79,6 @@ module.exports = function (config) {
 				pattern: 'platform-dev/src/*.js',
 				included: false
 			}, {
-				pattern: 'platform-dev/test/**/*.html',
-				included: false
-			}, {
-				pattern: 'platform-dev/test/**/*.js',
-				included: false
-			}, {
 				pattern: 'polymer-expressions/src/*.js',
 				included: false
 			}, {
@@ -109,13 +93,7 @@ module.exports = function (config) {
 			}, {
 				pattern: 'polymer-gestures/src/*.js',
 				included: false
-			}, {
-				pattern: 'polymer-expressions/tests/*.js',
-				included: false
-			}, {
-				pattern: 'TemplateBinding/tests/*.js',
-				included: false
-			}, {
+			}, , {
 				pattern: 'polymer-dev/polymer.html',
 				included: false
 			}, {
@@ -123,9 +101,6 @@ module.exports = function (config) {
 				included: false
 			}, {
 				pattern: 'polymer-dev/src/**/*.js',
-				included: false
-			}, {
-				pattern: 'polymer-dev/build/polymer.js',
 				included: false
 			}, {
 				pattern: 'polymer-dev/test/**/*.css',
@@ -154,7 +129,6 @@ module.exports = function (config) {
 				included: false
 			}
 		],
-
 
 		// list of files to exclude
 		exclude: [],
@@ -192,6 +166,12 @@ module.exports = function (config) {
 		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
 		browsers: ['Chrome'],
 
+
+		plugins: [
+			'karma-chrome-launcher',
+			'karma-jasmine',
+			'karma-mocha-reporter'
+		],
 
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
