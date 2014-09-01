@@ -1,6 +1,6 @@
 #!WORK IN PROGRESS!
 
-##Usage
+##Development
 
 Create a folder called PolymerMVC
 
@@ -20,6 +20,7 @@ Install the dependencies:
 
 ```bash
 $ bower install
+$ npm install
 ```
 
 This will install all the bower dependencies in the root PolymerMVC folder.
@@ -44,7 +45,24 @@ In your browser open `http://localhost:8001/PolymerMVC/demo` to see the demo pag
 
 ##Testing
 
-###Coming up soon
+Make sure you have `grunt` and `grunt-cli` and while in the project folder, where the `gruntfile.js` file is located
+run:
+
+```bash
+$ grunt test
+```
+
+All tests are added in the `test/js` folder and must end with `.spec.js`. The jasmine configuration can
+be found in the `conf` folder. Every html test must have a function named `test` attached to its `window` object
+as it will be called from jasmine:
+
+```javascript
+<script>
+	function test(expect) {
+		expect(true).toBeTruthy();
+	}
+</script>
+```
 
 ##Contributing
 
