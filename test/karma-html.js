@@ -2,7 +2,7 @@
 
 	var thisFile = 'karma-html.js';
 
-	function htmlIt(name, src, fn) {
+	function htmlIt(name, src) {
 		it(name, function (done) {
 			var iFrame = document.createElement('iframe');
 			document.body.appendChild(iFrame);
@@ -14,7 +14,7 @@
 			}
 
 			iFrame.onload = function () {
-				var res = iFrame.contentWindow.test(window.expect, window, doneFake);
+				var res = iFrame.contentWindow.test(window.expect, doneFake);
 				if (res !== false) {
 					doneFake();
 				}

@@ -54,7 +54,7 @@
   </body>
 
   <script>
-    function test(expect, window, done) {
+    function test(expect, done) {
       var ctrl = document.querySelector('test-ctrl');
       var view = document.querySelector('test-partial-view');
       expect(ctrl.$scope).toBeDefined();
@@ -68,6 +68,7 @@
 
       ctrl.$scope.val = 4;
       expect(view.$scope.val).toEqual(4);
+      expect(view.value.val).toEqual(4);
 
       Platform.flush();
 
