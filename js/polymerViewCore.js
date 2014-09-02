@@ -1,4 +1,4 @@
-(function (mvc, helpers) {
+(function (mvc, helpers, registry) {
 
 	Polymer('polymer-view', {
 		publish: {
@@ -10,8 +10,8 @@
 		},
 		ready: function () {
 			var host = this.shadowRoot.host;
-			if (host && host.registerView && typeof host.registerView === 'function') {
-				host.registerView(this);
+			if (host && host.addChildView && typeof host.addChildView === 'function') {
+				host.addChildView(this);
 			}
 
 			if (this.controller && typeof this.controller === 'string') {
@@ -19,7 +19,7 @@
 				this.forceControllerAttach();
 			}
 		},
-		registerView: function (view) {
+		addChildView: function (view) {
 			if (!this.views) {
 				this.views = [];
 			}
@@ -27,21 +27,18 @@
 			this.views.push(view);
 		},
 		enqueueForAttach: function () {
-			var registeredMeta = helpers.getMetaData('ControllersQueue', this.controller);
+			var registeredMeta = registry.getRegisteredView(this.controller);
 			if (!registeredMeta) {
-				var meta = helpers.setMetaData('ControllersQueue', this.controller, {
-					views: []
-				});
-
+				var meta = registry.registerView(this);
 				meta.views.push(this);
 			} else {
 				registeredMeta.views.push(this);
 			}
 		},
 		forceControllerAttach: function () {
-			var registeredMeta = helpers.getMetaData('Controllers', this.controller);
-			if (registeredMeta) {
-				registeredMeta.controller.attachView();
+			var ctrl = registry.getRegisteredController(this.controller);
+			if (ctrl) {
+				ctrl.attachView();
 			}
 		},
 		attachController: function (controller) {
@@ -64,4 +61,4 @@
 			return this._$scope;
 		}
 	});
-}(window.polymerMvc, window.polymerMvc.helpers));
+}(window.polymerMvc, window.polymerMvc.helpers, window.polymerMvc.registry));

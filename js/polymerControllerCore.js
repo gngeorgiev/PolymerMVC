@@ -1,4 +1,4 @@
-(function (mvc, helpers) {
+(function (mvc, helpers, registry) {
 	Polymer('polymer-controller', {
 		_registered: false,
 		ready: function () {
@@ -12,15 +12,10 @@
 				return;
 			}
 
-			helpers.setMetaData('Controllers', this.element.name, {
-				controller: this,
-				id: this.element.name
-			});
-
-			this._registered = true;
+			registry.registerController(this);
 		},
 		attachView: function () {
-			var viewMeta = helpers.getMetaData('ControllersQueue', this.element.name);
+			var viewMeta = registry.getRegisteredView(this.element.name);
 			if (viewMeta && viewMeta.views) {
 				delete viewMeta.metaData[this.element.name];
 				for (var i = 0; i < viewMeta.views.length; i++) {
@@ -40,4 +35,4 @@
 			return this._$view;
 		}
 	});
-}(window.polymerMvc, window.polymerMvc.helpers));
+}(window.polymerMvc, window.polymerMvc.helpers, window.polymerMvc.registry));
