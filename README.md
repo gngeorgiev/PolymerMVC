@@ -64,6 +64,21 @@ as it will be called from jasmine:
 </script>
 ```
 
+Optionally this method can accept a `done` parameter which can be used to test async code. In this case the function must return `false`;
+
+```javascript
+<script>
+	function test(expect, done) {
+		setTimeout(function () {
+			expect(true).toBeTruthy();
+			done();
+		}, 100);
+		
+		return false;
+	}
+</script>
+```
+
 ##Contributing
 
 Feel free to submit any issues or pull requests as there are no layed out standarts yet.
