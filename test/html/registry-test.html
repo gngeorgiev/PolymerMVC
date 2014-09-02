@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="">
+
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../../platform-dev/platform.js"></script>
+    <script src="../../polymerMvcCore.js"></script>
+
+    <link rel="import " href="../../polymerMvc.html ">
+    <link rel="import " href="../../polymerController.html ">
+    <link rel="import " href="../../polymerView.html ">
+  </head>
+
+  <body>
+
+  </body>
+
+  <script>
+    function test(expect) {
+    	var reg = polymerMvc.registry;
+    	var ctrl = new PolymerController();
+    	var view = new PolymerView();
+    	view.controller = 'polymer-controller';
+    	view.enqueueForAttach();
+    	view.forceControllerAttach();
+
+    	Platform.flush();
+    	expect(reg.getRegisteredController(ctrl.element.name)).toBeDefined();
+    	expect(reg.getRegisteredView(view.controller)).toBeDefined();
+    }
+  </script>
+
+</html>

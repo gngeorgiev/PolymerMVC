@@ -38,7 +38,10 @@
 	};
 
 	registry.getRegisteredController = function (controller) {
-		return helpers.getMetaData('Controllers', controller).controller;
+		var meta = helpers.getMetaData('Controllers', controller);
+		if (meta && meta.controller) {
+			return meta.controller;
+		}
 	};
 
 	registry.registerView = function (view) {
@@ -52,10 +55,6 @@
 	registry.getRegisteredView = function (key) {
 		return helpers.getMetaData('ControllersQueue', key);
 	}
-
-
-
-
 
 	window.polymerMvc = polymerMvc;
 }());

@@ -16,8 +16,8 @@
 		},
 		attachView: function () {
 			var viewMeta = registry.getRegisteredView(this.element.name);
-			if (viewMeta && viewMeta.views) {
-				delete viewMeta.metaData[this.element.name];
+			if (viewMeta && viewMeta.views && !viewMeta.attached) {
+				viewMeta.metaData[this.element.name].attached = true;
 				for (var i = 0; i < viewMeta.views.length; i++) {
 					var view = viewMeta.views[i];
 					view.attachController(this);
